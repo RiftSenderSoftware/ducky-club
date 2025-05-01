@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
     public float moveDuration = 0.3f;
     public Vector2Int gridPosition;
     public SpriteRenderer playerSpriteRender;
+    public Sprite[] playerOtherSides;
     public LayerMask obstacleLayer;
     public LayerMask boxLayer;
 
@@ -20,16 +21,26 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W)) Move(Vector2Int.up);
-        if (Input.GetKeyDown(KeyCode.S)) Move(Vector2Int.down);
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            playerSpriteRender.sprite = playerOtherSides[1];
+            Move(Vector2Int.up);
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            playerSpriteRender.sprite = playerOtherSides[2];
+            Move(Vector2Int.down);
+        }
         if (Input.GetKeyDown(KeyCode.A)) 
         { 
             Move(Vector2Int.left);
+            playerSpriteRender.sprite = playerOtherSides[0];
             playerSpriteRender.flipX = true;
         }
         if (Input.GetKeyDown(KeyCode.D))
         {
             Move(Vector2Int.right);
+            playerSpriteRender.sprite = playerOtherSides[0];
             playerSpriteRender.flipX = false;
         }
     }

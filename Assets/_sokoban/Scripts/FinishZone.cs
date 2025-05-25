@@ -3,22 +3,18 @@ using UnityEngine.Events;
 
 public class FinishZone : MonoBehaviour
 {
-    [SerializeField] private UnityEvent playerEnterEvent;
-    [SerializeField] private UnityEvent playerExitEvent;
+    private WinLoader winLoader;
 
+    private void Awake()
+    {
+        winLoader = FindAnyObjectByType<WinLoader>();
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            playerEnterEvent.Invoke();
+            winLoader.PlayerWin();
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            playerEnterEvent.Invoke();
-        }
-    }
 }
